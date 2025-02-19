@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Employee Management</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+</head>
+<body>
+    <table id="employeeTable" class="display">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Position</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#employeeTable').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "http://localhost/employee_management/get_employees.php",
+                "columns": [
+                    { "data": "id" },
+                    { "data": "name" },
+                    { "data": "department_name" },
+                    { "data": "position_name" },
+                    { 
+                        "data": null,
+                        "render": function(data) {
+                            return `<button onclick="deleteEmployee(${data.id})">Delete</button>`;
+                        }
+                    }
+                ]
+            });
+        });
+
+        function deleteEmployee(id) {
+            fetch(`http://localhost/employee_management/delete_employee.php?id=${id}`)
+                .then(response => response.json())
+                .then(() => location.reload());
+        }
+    </script>
+</body>
+</html>
