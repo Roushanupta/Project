@@ -1,0 +1,42 @@
+Running the Project
+
+1. Set Up Apache and MySQL
+
+Install XAMPP (for Apache & MySQL).
+
+Start Apache & MySQL services.
+
+Import the database schema into MySQL.
+
+
+
+2. Deploy the Backend (PHP API)
+
+Place PHP files in htdocs/employee_management/.
+
+Access it via http://localhost/employee_management/get_employees.php.
+
+
+
+3. Run the Cordova App
+
+Install Cordova:
+
+npm install -g cordova
+
+Create a new Cordova project:
+
+cordova create employeeApp
+cd employeeApp
+
+Add the web assets (index.html, script.js) inside www/.
+
+Add an Android/iOS platform:
+
+cordova platform add android
+
+Build and run the app:
+
+cordova build android
+cordova run android
+               
